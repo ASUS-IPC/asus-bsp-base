@@ -72,7 +72,7 @@ clean_up()
    unset EULA LIST_MACHINES VALID_MACHINE
    unset CWD TEMPLATES SHORTOPTS LONGOPTS ARGS PROGNAME
    unset generated_config updated
-   unset MACHINE SDKMACHINE DISTRO OEROOT
+   unset MACHINE SDKMACHINE DISTRO OEROOT IMAGE_VERSION
 }
 
 # get command line options
@@ -163,7 +163,9 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
     grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
     cat >> conf/local.conf <<EOF
 
-DL_DIR ?= "\${BSPDIR}/downloads/"
+DL_DIR ?= "$HOME/yocto-3.3/share/downloads/"
+SSTATE_DIR ?= "$HOME/yocto-3.3/share/sstate-cache/"
+PARALLEL_MAKE = "-j 8"
 LICENSE_FLAGS_WHITELIST ?= "commercial"
 DISTRO_FEATURES_append += " virtualization"
 VIRTUAL-RUNTIME_init_manager = "systemd"
@@ -185,6 +187,10 @@ EOF
     done
 
     generated_config=1
+fi
+
+if [ -n $IMAGE_VERSION ]; then
+	echo IMAGE_VERSION ?= \"$IMAGE_VERSION\" >> conf/local.conf
 fi
 
 # Handle EULA setting
