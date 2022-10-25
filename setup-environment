@@ -164,6 +164,10 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
     cat >> conf/local.conf <<EOF
 
 DL_DIR ?= "\${BSPDIR}/downloads/"
+PARALLEL_MAKE = "-j 8"
+LICENSE_FLAGS_ACCEPTED ?= "commercial"
+DISTRO_FEATURES:append = " virtualization"
+VIRTUAL-RUNTIME_init_manager = "systemd"
 EOF
     # Change settings according environment
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
