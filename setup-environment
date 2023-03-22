@@ -167,8 +167,12 @@ DL_DIR ?= "$HOME/yocto-4.0/share/downloads/"
 SSTATE_DIR ?= "$HOME/yocto-4.0/share/sstate-cache/"
 PARALLEL_MAKE = "-j 8"
 LICENSE_FLAGS_ACCEPTED ?= "commercial"
-DISTRO_FEATURES:append = " virtualization"
+BBMASK += "poky/meta/recipes-devtools/rust"
+BBMASK += "poky/meta/recipes-devtools/cargo"
+PREFERRED_VERSION_rust ?= "1.65%"
+DISTRO_FEATURES:append = " systemd virtualization"
 VIRTUAL-RUNTIME_init_manager = "systemd"
+VIRTUAL-RUNTIME_initscripts = "systemd-compat-units"
 EOF
     # Change settings according environment
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
