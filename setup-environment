@@ -163,8 +163,7 @@ if [ "$build_dir_setup_enabled" = "true" ]; then
     grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
     cat >> conf/local.conf <<EOF
 
-DL_DIR ?= "$HOME/yocto-4.0/share/downloads/"
-SSTATE_DIR ?= "$HOME/yocto-4.0/share/sstate-cache/"
+DL_DIR ?= "\${BSPDIR}/downloads/"
 PARALLEL_MAKE = "-j 8"
 LICENSE_FLAGS_ACCEPTED ?= "commercial"
 DISTRO_FEATURES:append = " virtualization"
