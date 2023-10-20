@@ -169,6 +169,7 @@ PARALLEL_MAKE = "-j 8"
 LICENSE_FLAGS_ACCEPTED ?= "commercial"
 DISTRO_FEATURES:append = " virtualization"
 VIRTUAL-RUNTIME_init_manager = "systemd"
+RUSTVERSION = "1.72%"
 EOF
     # Change settings according environment
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
