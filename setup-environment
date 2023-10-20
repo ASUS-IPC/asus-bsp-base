@@ -72,7 +72,7 @@ clean_up()
    unset EULA LIST_MACHINES VALID_MACHINE
    unset CWD TEMPLATES SHORTOPTS LONGOPTS ARGS PROGNAME
    unset generated_config updated
-   unset MACHINE SDKMACHINE DISTRO OEROOT
+   unset MACHINE SDKMACHINE DISTRO OEROOT IMAGE_VERSION
 }
 
 # get command line options
@@ -188,6 +188,10 @@ EOF
     done
 
     generated_config=1
+fi
+
+if [ -n $IMAGE_VERSION ]; then
+       echo IMAGE_VERSION ?= \"$IMAGE_VERSION\" >> conf/local.conf
 fi
 
 # Handle EULA setting
